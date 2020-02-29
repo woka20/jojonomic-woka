@@ -3,8 +3,8 @@
 $servername = "localhost";
 $username = "woka-ubuntu";
 $password = "woka";
-$dbName="bambang";
-// echo "bambang $dbName";
+$dbName="ew9";
+
 // Create connection
 $conn = new mysqli($servername, $username, $password);
 // Check connection
@@ -20,37 +20,35 @@ $sql = "CREATE DATABASE $dbName";
 if ($conn->query($sql) === TRUE) {
     echo "Database created successfully";
 } else {
-    echo "GAGAL";
-    // $error= $conn->error;
+    
+    $error= $conn->error;
 };
 
 
 //Create Tables
-$catalog="CREATE TABLE $dbName.products_cd (
-    id INT(200) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+$catalog="CREATE TABLE IF NOT EXISTS $dbName.products_cd (
+    id_product INT(200) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(30) NOT NULL,
     rate INT(30) NOT NULL,
     category VARCHAR(40) NOT NULL,
     quantity INT(255) NOT NULL)";
  
 
-$users="CREATE TABLE $dbName.users(
-    id INT(200) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+$users="CREATE TABLE IF NOT EXISTS $dbName.users(
+    id_user INT(200) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     full_name VARCHAR(30) NOT NULL,
     email VARCHAR(50) NOT NULL,
     phone INT(15) NOT NULL)";
 
 
-$rent="CREATE TABLE $dbName.rent(
-    id INT(200) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    id_user VARCHAR(30) NOT NULL,
-    id_product VARCHAR(50) NOT NULL,
+$rent="CREATE TABLE IF NOT EXISTS $dbName.rent(
+    id_rent INT(200) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    id_user INT(200) UNSIGNED NOT NULL,CONSTRAINT fk_user FOREIGN KEY (id_user) REFERENCES users(id_user) ON UPDATE CASCADE ON DELETE RESTRICT,
+    id_product INT(200) UNSIGNED NOT NULL,CONSTRAINT fk_product FOREIGN KEY (id_product) REFERENCES products_cd(id_product) ON UPDATE CASCADE ON DELETE RESTRICT,
     begin_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     status_rent VARCHAR(20) NOT NULL,
-    end_date TIMESTAMP DEFAULT NULL,
-    total_payment INT(200),
-    FOREIGN KEY (id_user) REFERENCES users(id),
-    FOREIGN KEY (id_product) REFERENCES products_cd(id)
+    end_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    total_payment INT(200)
 )";
 
 if ($conn->query($catalog) === TRUE && $conn->query($users) === TRUE && $conn->query($rent) === TRUE) {
@@ -63,4 +61,4 @@ if ($conn->query($catalog) === TRUE && $conn->query($users) === TRUE && $conn->q
 $conn->close();
 
 
-// $app->run();
+
