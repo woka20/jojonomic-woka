@@ -8,10 +8,8 @@ return [
     |--------------------------------------------------------------------------
     |
     | Here you may specify the default filesystem disk that should be used
-    | by the framework. A "local" driver, as well as a variety of cloud
-    | based drivers are available for your choosing. Just store away!
-    |
-    | Supported: "local", "s3", "rackspace"
+    | by the framework. The "local" disk, as well as a variety of cloud
+    | based disks are available to your application. Just store away!
     |
     */
 
@@ -39,32 +37,31 @@ return [
     | may even configure multiple disks of the same driver. Defaults have
     | been setup for each driver as an example of the required options.
     |
+    | Supported Drivers: "local", "ftp", "sftp", "s3", "rackspace"
+    |
     */
 
     'disks' => [
 
         'local' => [
             'driver' => 'local',
-            'root'   => storage_path('app'),
+            'root' => storage_path('app'),
+        ],
+
+        'public' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
         ],
 
         's3' => [
-            'driver'   => 's3',
-            'key'      => env('S3_KEY'),
-            'secret'   => env('S3_SECRET'),
-            'region'   => env('S3_REGION'),
-            'bucket'   => env('S3_BUCKET'),
-            'base_url' => env('S3_URL'),
-        ],
-
-        'rackspace' => [
-            'driver'    => 'rackspace',
-            'username'  => env('RACKSPACE_USERNAME'),
-            'key'       => env('RACKSPACE_KEY'),
-            'container' => env('RACKSPACE_CONTAINER'),
-            'endpoint'  => 'https://identity.api.rackspacecloud.com/v2.0/',
-            'region'    => env('RACKSPACE_REGION'),
-            'url_type'  => 'publicURL',
+            'driver' => 's3',
+            'key' => env('AWS_ACCESS_KEY_ID'),
+            'secret' => env('AWS_SECRET_ACCESS_KEY'),
+            'region' => env('AWS_DEFAULT_REGION'),
+            'bucket' => env('AWS_BUCKET'),
+            'url' => env('AWS_URL'),
         ],
 
     ],
