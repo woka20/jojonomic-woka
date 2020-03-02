@@ -23,14 +23,13 @@ $router->group(['prefix' => 'api/v1', 'middleware' => 'auth'], function() use ($
     
   $router->delete('product/{id}','ProductsControl@deleteProduct');
   $router->put('rent/{id}', 'RentsControl@updateRent');
+  $router->delete('user/{id}','UsersControl@deleteUser');
   $router->get('rent', 'RentsControl@getRent');
 });
 
 $router->group(['prefix' => 'api/v2'], function() use ($router)
 {
   $router->post('register','UsersControl@register');
-  $router->put('user/{id}','UsersControl@updateUser');
-  $router->delete('user/{id}','UsersControl@deleteUser');
   $router->post('login','UsersControl@login');
 });
 

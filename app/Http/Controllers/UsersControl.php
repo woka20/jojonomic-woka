@@ -30,17 +30,17 @@ class UsersControl extends Controller{
         
     }
 
-    public function updateUser(Request $request, $id){
-        $user= User::find($id);
+    // public function updateUser(Request $request, $id){
+    //     $user= User::find($id);
        
-        $user->fullname= $request->input('fullname');
-        $user->email= $request -> input('email');
-        $user->password=$request -> input('password');
+    //     $user->fullname= $request->input('fullname');
+    //     $user->email= $request -> input('email');
+    //     $user->password=$request -> input('password');
     
-        $user->save();
+    //     $user->save();
 
-        return response('BERHASIL UPDATE USER');
-    }
+    //     return response('BERHASIL UPDATE USER');
+    // }
     
 
     public function deleteUser(Request $request, $id){

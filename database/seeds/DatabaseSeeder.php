@@ -12,9 +12,9 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         \App\User::create([
-            'fullname'  => "Bambang",
-            'email' => "Bambang". '@email.com',
-            'password'  => "hhuhygyjshgYJSGJ"
+            'fullname'  => "Woka Aditama",
+            'email' => "woka'@alterra.id",
+            'password'  => "$2y$10$J.ikXagDuzflQnKsuUF82.XkmQvwQHVdCSTNSuR3JDPYqUZB3xnua"
     ]);
     
        \App\Produk::create([
