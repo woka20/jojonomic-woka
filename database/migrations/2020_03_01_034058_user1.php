@@ -18,7 +18,8 @@ class User1 extends Migration
             $table->bigIncrements('id_user');
             $table->string('fullname');
             $table->string('email');
-            $table->string('phone');
+            $table->string('password')->nullable($value=true);
+            $table->string('api_token')->nullable($value=true);
             // $table->timestamps();
         });
     }

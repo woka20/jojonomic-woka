@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Middleware;
-
+use App\User;
 use Closure;
 use Illuminate\Contracts\Auth\Factory as Auth;
 
@@ -35,10 +35,27 @@ class Authenticate
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if ($this->auth->guard($guard)->guest()) {
-            return response('Unauthorized.', 401);
-        }
+        
+            if ($request->has('api_token')) {
+                $token = $request->input('api_token');
+                $check_token = User::where('api_token', $token)->first();
+                
+                if ($check_token['email'] != "woka@alterra.id") {
+                    $res['success'] = false;
+                    $res['message'] = 'Permission not allowed!';
 
-        return $next($request);
+                    return response($res);
+                }else{
+                    return $next($request);
+                }
+            }else{
+                $res['success'] = false;
+                $res['message'] = 'Login please!';
+
+                return response($res);
+            }
+        
+        return response('Unauthorized.', 401);
+    
     }
 }

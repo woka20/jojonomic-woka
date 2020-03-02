@@ -10,9 +10,9 @@ use Laravel\Lumen\Auth\Authorizable;
 
 
 
-class Produk extends Model {
+class Rent extends Model {
     public $fillable = [
-        'title', 'rate', 'category', 'price', 'quantity'
+        'id_user', 'id_product', 'status_rent', 'price', 'created_at', 'updated_at'
     ];
 
     /**
@@ -21,9 +21,6 @@ class Produk extends Model {
      * @var array
      */
     // protected $hidden = [];
-    protected $primaryKey='id_product';
+    protected $primaryKey='id_rent';
     public $timestamps = false;
 }
-
-
-

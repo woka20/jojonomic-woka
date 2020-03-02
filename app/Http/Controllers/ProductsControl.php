@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Produk;
+use App1\User;
 // use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -30,8 +31,17 @@ class ProductsControl extends Controller{
 
         return response('BERHASIL UPDATE');
     }
+    
 
-    public function tai(){
+    public function deleteProduct(Request $request, $id){
+        $product= Produk::find($id);
+        $product->delete();
+        
+
+        return response('BERHASIL DIHAPUS');
+    }
+
+    public function getProduct(){
         $product= Produk::all();
         
 
@@ -39,7 +49,7 @@ class ProductsControl extends Controller{
     }
 }
 
-?>
+
 
 
 
